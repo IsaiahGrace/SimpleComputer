@@ -30,10 +30,11 @@ module SCP (CLK, AR, INPUT, OUTPUT, MEM_ADDR, MEM_DATA, MEM_EDIT);
    wire SPA; // SP output on Address bus
    
    // ALU
-   wire AOE;       // ALU output on Data bus
-   wire ALE;       // ALU enable/retain state
-   wire [1:0] ALS; // ALU state control/function select
-
+   wire AOE;            // ALU output on Data bus
+   wire ALE;            // ALU enable/retain state
+   wire [1:0] ALS;      // ALU state control/function select
+   wire CF, ZF, NF, VF; // ALU condition bits
+   
    // IO
    wire IOR; // IO read from INPUT to Data Bus
    wire IOW; // IO output to OUTPUT from Data Bus
@@ -45,18 +46,18 @@ module SCP (CLK, AR, INPUT, OUTPUT, MEM_ADDR, MEM_DATA, MEM_EDIT);
 
    // Modules
    IDMS idms (CLK, AR, 
-	      MSL, MOE, MWE,
-	      IRL, IRA, IOP,
+	      MSL, MOE, MWE, 
+	      IRL, IRA, IOP, 
 	      PCC, POA, PLA, POD, PLD, 
 	      SPI, SPD, SPA, 
-	      AOE, ALE, ALS, 
+	      AOE, ALE, ALS, CF, ZF, NF, VF, 
 	      IOR, IOW);
    
    MEM mem (CLK, MSL, MOE, MWE, DATA, ADDR, MEM_ADDR, MEM_DATA, MEM_EDIT);
    IR  ir  (CLK, AR, IRL, IRA, IOP, DATA, ADDR);
    PC  pc  (CLK, AR, PCC, POA, PLA, POD, PLD, DATA, ADDR);
    SP  sp  (CLK, AR, SPI, SPD, SPA, ADDR);
-   ALU alu (CLK, AR, AOE, ALE, ALS, DATA);
+   ALU alu (CLK, AR, AOE, ALE, ALS, CF, ZF, NF, VF, DATA);
    IO  io  (CLK, AR, IOR, IOW, DATA, INPUT, OUTPUT);
 
 endmodule // SCP
