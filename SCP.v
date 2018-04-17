@@ -58,6 +58,6 @@ module SCP (CLK, AR, INPUT, OUTPUT, MEM_ADDR, MEM_DATA, MEM_EDIT);
    PC  pc  (CLK, AR, PCC, POA, PLA, POD, PLD, DATA, ADDR);
    SP  sp  (CLK, AR, SPI, SPD, SPA, ADDR);
    ALU alu (CLK, AR, AOE, ALE, ALS, CF, ZF, NF, VF, DATA);
-   IO  io  (CLK, AR, IOR, IOW, DATA, INPUT, OUTPUT);
+   IO  io  (IOR, IOW, DATA, INPUT, OUTPUT);
 
 endmodule // SCP
