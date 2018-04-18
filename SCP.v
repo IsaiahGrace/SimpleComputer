@@ -1,7 +1,7 @@
 module SCP (CLK, AR, INPUT, OUTPUT, MEM_ADDR, MEM_DATA, MEM_EDIT);
    input wire CLK, AR;        // Clock and Reset
-   input wire [7:0] INPUT;    // INPUT for IO module
-   output wire [7:0] OUTPUT;  // OUTPUT for IO module
+   input wire [15:0]  INPUT;  // INPUT for IO module
+   output wire [15:0] OUTPUT; // OUTPUT for IO module
    input wire [7:0] MEM_ADDR; // Adress of memory to edit
    input wire [7:0] MEM_DATA; // Data to assign to memory
    input wire 	    MEM_EDIT; // Asyncronous memory set
